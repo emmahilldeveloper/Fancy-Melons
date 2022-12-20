@@ -54,6 +54,7 @@ searchButton.addEventListener("click", (evt) => {
             tastingDivCard.appendChild(tastingPhoto);
             const divCardBody = document.createElement("div");
             divCardBody.className = "card-body";
+            divCardBody.style = "background-color: #d3d3d3;"
             tastingDivCard.appendChild(divCardBody);
 
             //Shows the tasting name

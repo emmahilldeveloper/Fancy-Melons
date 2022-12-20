@@ -5,7 +5,6 @@
     {% block content %}
 
 <style>
-
 #background-video {
     width: 100vw;
     height: 100vh;
@@ -21,12 +20,11 @@
 
 
 <div class="container-fluid">
-    <div class="col-12" style="text-align:center; background-color: rgb(255, 255, 255, 0.5); margin-top: 20%;">
-        <h1>Fancy Melons</h1>
-        <h3>Book your private melon tasting today!</h3>
+    <div class="row-1" style="text-align:center; padding-bottom:20px; background-color: rgb(255, 255, 255, 0.7); margin-top: 15%; margin-left: 30%; max-width: 40%; max-height: 100%;">
+        <h1 style="font-family: 'Trattatello'; font-size: 100px; padding-top:20px;">Fancy Melons</h1>
+        <h3 style="font-family: 'Arial'; font-size: 30px; padding-top:20px;">Book your private melon tasting today!</h3>
         <br>
-        <a type="click" href="/login"><button>Log In</button></a>
-        <a type="click" href="/signup"><button>Sign Up</button></a>
+        <a type="click" href="/login" style="font-family: 'Arial';"><button class="btn btn-primary">Log In</button></a>
     </div>
     
 
@@ -40,6 +38,4 @@
 </div>
 
     {% endblock %}
-<!-- Javascript files imported here. -->
-<script src=""></script>
 {% endblock %}

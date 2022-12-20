@@ -6,7 +6,7 @@ import crud
 import urllib.parse
 import requests
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
 app.config.update(TESTING=True, SECRET_KEY='DEV')
@@ -118,6 +118,7 @@ def profile():
         tasting_details_dict["tasting_name"] = tasting_details[0].tasting_name
         tasting_details_dict["tasting_photo"] = tasting_details[0].tasting_photo
         tasting_details_dict["tasting_date"] = reservation.reservation_date
+        tasting_details_dict["tasting_time_end"] = reservation.reservation_date + timedelta(minutes=30)
         reservations.append(tasting_details_dict)
 
     return render_template("profile.html", user_info = user_info, reservations = reservations)
@@ -151,12 +152,14 @@ def search_API():
     date = request.json['date']
 
     tasting_matches = []
+    tasting_matches.clear()
 
     tastings = crud.all_tastings()
     reservations = crud.all_reservations()
 
     for tasting in tastings:
         tasting_matches_dict = {}
+        tasting_matches_dict.clear()
         for reservation in reservations:
             if reservations is []:
                 break
@@ -168,12 +171,19 @@ def search_API():
                     tasting_matches.append(tasting_matches_dict)
                 else:
                     flash("No availbility with this date.", category='danger')
+
         tasting_matches_dict["tasting_id"] = tasting.tasting_id
         tasting_matches_dict["tasting_name"] = tasting.tasting_name
         tasting_matches_dict["tasting_photo"] = tasting.tasting_photo
         tasting_matches.append(tasting_matches_dict)
 
-    return jsonify({'matches': tasting_matches})
+    #no duplicates in my results
+    results = []
+    for i in range(len(tasting_matches)):
+        if tasting_matches[i] not in tasting_matches[i + 1:]:
+            results.append(tasting_matches[i])
+
+    return jsonify({'matches': results})
 
 
 
@@ -190,8 +200,10 @@ def reservation(tasting_id):
         user_id = user_info.user_id
 
     if request.method == "POST":
-        reservation_date = request.form.get("date")
-        reservation_time = request.form.get("time")
+        date = request.form.get("date")
+        time = request.form.get("time")
+        reservation_date = date + " " + time
+        print(reservation_date)
         reservation = crud.create_reservation(user_id, reservation_date, tasting_id)
         db.session.add(reservation)
         db.session.commit()

@@ -4,19 +4,27 @@
 {% include 'navbar.html' %}
     {% block content %}
 
-
+<br>
+<br>
+<br>
 <div class="container-fluid">
     <h1 style="text-align: center;">Hello, {{ user_info.first_name }} {{ user_info.last_name }}.</h1>
 </div>
 
+<br>
+<br>
+<br>
 <div class="container-fluid">
-    <h1>Upcoming Reservations</h1>
+    <h3 class="col-12" style="text-align: center;">Upcoming Reservations</h3>
+    <hr>
         {% for reservation in reservations %}
-        <div class="card" style="max-width: 30%; background-color: rgb(115, 115, 115, 0.5)">
-            <img class="card-img-top" style="max-width: 100%;" src="{{ reservation.tasting_photo }}"/>
+        <div class="card" style="max-width: 30%; max-height: 100%; background-color: rgb(115, 115, 115, 0.5); margin: 20px; display: inline-block;">
+            <img class="card-img-top" style="max-width: 100%; max-height: 200px;" src="{{ reservation.tasting_photo }}"/>
             <div class="card-body">
-                <h5 class="card-title">{{ reservation.tasting_name }}</h5>
-                Date: {{ reservation.tasting_date }}
+                <h5 class="card-title" style="text-align: center;">{{ reservation.tasting_name }}</h5>
+                <span >Date: {{ reservation.tasting_date.strftime('%m/%d/%Y') }}</span>
+                <br>
+                <span>Time: {{ reservation.tasting_date.strftime('%I:%M %p') }} - {{ reservation.tasting_time_end.strftime('%I:%M %p') }}</span>
             </div>
         </div>
         
@@ -25,6 +33,4 @@
 
 
     {% endblock %}
-<!-- Javascript files imported here. -->
-<script src=""></script>
 {% endblock %}
