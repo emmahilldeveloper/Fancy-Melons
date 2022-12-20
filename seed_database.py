@@ -44,3 +44,5 @@ for tasting in tastings_data:
 
 model.db.session.add_all(tastings_in_db)
 
+####### Save everything. #######
+model.db.session.commit()

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %} Search {% endblock %}
+{% block body %}
+{% include 'navbar.html' %}
+    {% block content %}
+
+
+<div class="container-fluid">
+    <form class="col-12" action="/search" method="POST">
+
+        <div class="row">
+            <input class="form-control" required = "true" id="floatingInput" type="date" name="date" placeholder="Date"/>
+            <label for="floatingInput">Date</label>
+        </div>
+
+        <div class="row">
+            <input class="form-control" required = "true" id="floatingInput" type="time" name="start-time" placeholder="Start Time"/>
+            <label for="floatingInput">Start Time</label>
+        </div>
+
+        <div class="row">
+            <input class="form-control" required = "true" id="floatingInput" type="time" name="end-time" placeholder="End Time"/>
+            <label for="floatingInput">End Time</label>
+        </div>
+
+    </form>
+
+    <div class="row">
+        <button type="submit" id="search" class="btn btn-primary">Search</button>
+    </div>
+
+    <div class="row">
+        <button type="button" id="clear" class="btn btn-primary" href="/search">Clear</button>
+    </div>
+
+</div>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="cold-md-3">
+            <form>
+                <div class="card shadow mt">
+                    <div class="card-header">
+                        <h5>Tastings</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div id="tasting-results">
+                                <!-- JS DOM Manipulation here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+    {% endblock %}
+<!-- Javascript files imported here. -->
+<script src="/static/js/search.js"></script>
+{% endblock %}

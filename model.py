@@ -70,7 +70,7 @@ class Tasting(db.Model):
 
     tasting_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
     tasting_name = db.Column(db.String, unique = True, nullable = False)
-    tasting_photo = db.Column(db.Integer, nullable = False)
+    tasting_photo = db.Column(db.String, nullable = False)
     melon_id = db.Column(db.Integer, db.ForeignKey("melons.melon_id"))
 
     #foreign keys used by "tastings" table

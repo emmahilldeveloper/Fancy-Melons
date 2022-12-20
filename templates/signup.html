@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %} Home {% endblock %}
+{% block title %} Sign Up {% endblock %}
 {% block body %}
 {% include 'navbar.html' %}
     {% block content %}
@@ -31,7 +31,7 @@
 
         <div class="row">
             <div class="form-floating mb-3">
-                <input class="form-control" id="floatingInput" type="text" name="password" placeholder="Password">
+                <input class="form-control" required = "true" id="floatingInput" type="password" name="password" placeholder="Password">
                 <label for="floatingInput">Password</label>
                 <span><i>Must be 8-10 characters in length and include one capatalized letter, one numeric character, and one special character.</i></span>
             </div>
@@ -39,7 +39,7 @@
 
         <div class="row">
             <div class="form-floating mb-3">
-                <input class="form-control" id="floatingInput" type="text" name="passwordconf" placeholder="Password Confirmation">
+                <input class="form-control" required = "true" id="floatingInput" type="password" name="passwordconf" placeholder="Password Confirmation">
                 <label for="floatingInput">Password Confirmation</label>
                 <span><i>Must be 8-10 characters in length and include one capatalized letter, one numeric character, and one special character.</i></span>
             </div>

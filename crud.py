@@ -53,6 +53,24 @@ def all_user_info_by_email(email):
 
 
 
+def all_tastings():
+    """Will return all tastings currently available in database."""
+
+    return Tasting.query.all()
+
+
+
+
+
+def all_reservations():
+    """Will return all reservations currently available in database."""
+
+    return Reservation.query.all()
+
+
+
+
+
 if __name__ == '__main__':
     from server import app
     connect_to_db(app)
