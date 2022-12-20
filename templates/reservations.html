@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %} Sign Up {% endblock %}
+{% block body %}
+{% include 'navbar.html' %}
+    {% block content %}
+
+
+<div class="container-fluid" id="reservation-div">
+    <form class="col-12" action="/reservations/{{tasting_id}}" method="POST">
+
+        <div class="row">
+            <input class="form-control" required = "true" id="floatingInput" type="date" name="date" placeholder="Date"/>
+            <label for="floatingInput">Date</label>
+        </div>
+
+        <div class="row">
+            <input class="form-control" required = "true" id="floatingInput" type="time" name="time" placeholder="Time"/>
+            <label for="floatingInput">Time</label>
+        </div>
+
+        <div class="row">
+            <button type="submit" id="signup" class="btn btn-primary">Reserve</button>
+        </div>
+
+    </form>
+
+
+</div>
+
+    {% endblock %}
+<!-- Javascript files imported here. -->
+<script src=""></script>
+{% endblock %}

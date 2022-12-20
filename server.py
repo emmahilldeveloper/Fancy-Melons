@@ -21,7 +21,10 @@ app.jinja_env.auto_reload = True
 @app.route("/")
 def index():
     """Return homepage."""
-    return render_template("homepage.html")
+
+    user_info = None
+
+    return render_template("homepage.html", user_info = user_info)
 
 
 
@@ -38,10 +41,10 @@ def login():
         user = crud.all_user_info_by_email(email) #Get all of user's data (from searching by entered email)
 
         if user is None: #If the user is not in the database, ERROR
-            flash("ERROR: Incorrect credentials. Try again.", category='danger')
+            flash("Incorrect credentials.", category='danger')
             return redirect("/login")
         if user.password != password: #If the user's password is not equal to the saved password, ERROR
-            flash("ERROR: Incorrect credentials. Try again.", category='danger')
+            flash("Incorrect credentials.", category='danger')
             return redirect("/login")
         if user:
             session["user_id"] = user.user_id #Create session cookie for user's id
@@ -50,7 +53,10 @@ def login():
 
     #Load the page
     else:
-        return render_template("login.html")
+
+        user_info = None
+
+        return render_template("login.html", user_info = user_info)
 
 
 
@@ -79,11 +85,13 @@ def signup():
         user = crud.create_user(first_name, last_name, email, password)
         db.session.add(user)
         db.session.commit()
-        flash("Successful.", category='success')
-        return redirect("/profile")
+        flash("Successful. Please log in.", category='success')
+        return redirect("/login")
 
     else:
-        return render_template("signup.html")
+        user_info = None
+
+        return render_template("signup.html", user_info = user_info)
 
 
 
@@ -96,11 +104,23 @@ def profile():
     if "user_id" in session: #If user logged in and cookies are saved, get all their data
         email = session["email"]
         user_info = crud.all_user_info_by_email(email)
+        user_id = user_info.user_id
 
     else: #If user not logged in, kick back to homepage
+        flash("Must log in to view profile information.", category='danger')
         return redirect("/")
 
-    return render_template("profile.html", user_info = user_info)
+    reservations = []
+    all_reservations = crud.all_reservations_by_user(user_id)
+    for reservation in all_reservations:
+        tasting_details_dict = {}
+        tasting_details = crud.tasting_details_by_reservation(reservation.reservation_id)
+        tasting_details_dict["tasting_name"] = tasting_details[0].tasting_name
+        tasting_details_dict["tasting_photo"] = tasting_details[0].tasting_photo
+        tasting_details_dict["tasting_date"] = reservation.reservation_date
+        reservations.append(tasting_details_dict)
+
+    return render_template("profile.html", user_info = user_info, reservations = reservations)
 
 
 
@@ -115,9 +135,14 @@ def search():
         user_info = crud.all_user_info_by_email(email)
 
     else: #If user not logged in, kick back to homepage
+        flash("Must log in to view profile information.", category='danger')
         return redirect("/")
 
     return render_template("search.html", user_info = user_info)
+
+
+
+
 
 @app.route("/api/search", methods=["POST"])
 def search_API():
@@ -148,32 +173,34 @@ def search_API():
         tasting_matches_dict["tasting_photo"] = tasting.tasting_photo
         tasting_matches.append(tasting_matches_dict)
 
-    no_duplicates = []
-    for i in range(len(tasting_matches)):
-        if tasting_matches[i] not in tasting_matches[i + 1]:
-            no_duplicates.append(tasting_matches[i])
-
     return jsonify({'matches': tasting_matches})
 
 
 
 
 
-# @app.route("/api/book", methods=["POST"])
-# def book_API():
-#     """Returns all tastings."""
+####### Reservations #######
+@app.route("/reservations/<tasting_id>", methods = ["GET", "POST"])
+def reservation(tasting_id):
+    """Return reservation page."""
 
-#     if "user_id" in session: #If user logged in and cookies are saved, get all their data
-#         user_id = session["user_id"]
-#     tasting_id = request.json['value']
-#     reservation_date = request.json['date']
+    if "user_id" in session: #If user logged in and cookies are saved, get all their data
+        email = session["email"]
+        user_info = crud.all_user_info_by_email(email)
+        user_id = user_info.user_id
 
-#     user = crud.create_reservation(user_id, reservation_date, tasting_id)
-#     db.session.add(user)
-#     db.session.commit()
-#     flash("Successful.", category='success')
+    if request.method == "POST":
+        reservation_date = request.form.get("date")
+        reservation_time = request.form.get("time")
+        reservation = crud.create_reservation(user_id, reservation_date, tasting_id)
+        db.session.add(reservation)
+        db.session.commit()
+        flash("Successfully reserved.", category='success')
+        return redirect("/profile")
 
-#     return jsonify({})
+    return render_template("reservations.html", user_info = user_info, tasting_id = tasting_id)
+
+
 
 
 

@@ -1,20 +1,22 @@
-<nav class="navbar navbar-expand-lg bg-primary">
+<nav class="navbar navbar-expand-lg" style="background-color: rgb(115, 115, 115, 0.5)">
 
     <a class="navbar-brand active">
         <h1>🍉</h1>
     </a>
 
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav bg-light">
+        <ul class="navbar-nav" style="background-color: rgb(115, 115, 115, 0.5)">
             <li class="nav-item">
-              <a class="nav-link" href="/profile">Profile</a>
+              <a class="nav-link" id="navbar" href="/profile" style="color: black;">Profile</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/search">Search</a>
+              <a class="nav-link" id="navbar" href="/search" style="color: black;">Search</a>
             </li>
+            {% if user_info %}
             <li class="nav-item">
-                <a class="nav-link" href="/">Log Out</a>
+              <a class="nav-link" id="navbar" href="/" style="color: black;">Log Out</a>
             </li>
+            {% endif %}
         </ul>
     </div>
 

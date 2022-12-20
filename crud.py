@@ -71,6 +71,28 @@ def all_reservations():
 
 
 
+
+def all_reservations_by_user(user_id):
+    """Will return all reservations by user_id."""
+
+    return Reservation.query.filter(Reservation.user_id == user_id).all()
+
+
+
+
+
+def tasting_details_by_reservation(reservation_id):
+    """Will return all reservations by user_id."""
+
+    reservation = Reservation.query.filter(Reservation.reservation_id == reservation_id).first()
+    tasting_id = reservation.tasting_id
+
+    return Tasting.query.filter(Tasting.tasting_id == tasting_id).all()
+
+
+
+
+
 if __name__ == '__main__':
     from server import app
     connect_to_db(app)

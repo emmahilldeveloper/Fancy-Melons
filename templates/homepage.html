@@ -4,13 +4,37 @@
 {% include 'navbar.html' %}
     {% block content %}
 
+<style>
+
+#background-video {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+  }
+</style>
+
 
 <div class="container-fluid">
-    <h1>Fancy Melons</h1>
-    <h3>Your best friend in the private melon-tasting business.</h3>
-    <video autoplay>
-        <source src="/Static/Media/watermelon_video.mp4" type="video/mp4">
-    </video>
+    <div class="col-12" style="text-align:center; background-color: rgb(255, 255, 255, 0.5); margin-top: 20%;">
+        <h1>Fancy Melons</h1>
+        <h3>Book your private melon tasting today!</h3>
+        <br>
+        <a type="click" href="/login"><button>Log In</button></a>
+        <a type="click" href="/signup"><button>Sign Up</button></a>
+    </div>
+    
+
+    <div class="video-wrapper">
+        <video id="background-video" autoplay muted loop poster="">
+            <source src="/static/Media/watermelon_video.mp4" type="video/mp4">
+        </video>
+    </div>
 
 
 </div>

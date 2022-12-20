@@ -6,10 +6,23 @@
 
 
 <div class="container-fluid">
-    <h1>Hello, {{ user_info.first_name }} {{ user_info.last_name }}.</h1>
-
-
+    <h1 style="text-align: center;">Hello, {{ user_info.first_name }} {{ user_info.last_name }}.</h1>
 </div>
+
+<div class="container-fluid">
+    <h1>Upcoming Reservations</h1>
+        {% for reservation in reservations %}
+        <div class="card" style="max-width: 30%; background-color: rgb(115, 115, 115, 0.5)">
+            <img class="card-img-top" style="max-width: 100%;" src="{{ reservation.tasting_photo }}"/>
+            <div class="card-body">
+                <h5 class="card-title">{{ reservation.tasting_name }}</h5>
+                Date: {{ reservation.tasting_date }}
+            </div>
+        </div>
+        
+        {% endfor %}
+</div>
+
 
     {% endblock %}
 <!-- Javascript files imported here. -->
