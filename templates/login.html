@@ -5,11 +5,30 @@
     {% block content %}
 
 
-<div class="container-fluid">
-    <h1>Your best friend in the melon tasting business.</h1>
-    <video width="320" height="240" autoplay muted>
-        <source src="/Media/watermelon_video.mp4" type="video/mp4">
-    </video>
+<div class="container-fluid" id="login-div">
+    <form class="col-12" action="/login" method="POST">
+
+        <div class="row">
+            <div class="form-floating mb-3">
+                <input class="form-control" id="floatingInput" type="text" name="email" placeholder="Email">
+                <label for="floatingInput">Email</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-floating mb-3">
+                <input class="form-control" id="floatingInput" type="password" name="password" placeholder="Password">
+                <label for="floatingInput">Password</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <button type="submit" id="login" class="btn btn-primary">Log In</button>
+        </div>
+
+        <span>Don't have an account? <a href="/signup">Sign Up</a></span>
+
+    </form>
 
 
 </div>

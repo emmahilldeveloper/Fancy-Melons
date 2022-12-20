@@ -1,0 +1,17 @@
+[
+    {
+        "melon_name": "Watermelon",
+        "melon_price": 1,
+        "melon_photo": "https://images.heb.com/is/image/HEBGrocery/000320934"
+    },
+    {
+        "melon_name": "Cantaloupe",
+        "melon_price": 2,
+        "melon_photo": "https://i5.walmartimages.com/asr/fb4c18a5-9367-4770-b99f-7518c72db482.5609c32e87a3110b734aad048bf9fe35.jpeg"
+    },
+    {
+        "melon_name": "Honeydew",
+        "melon_price": 3,
+        "melon_photo": "https://i5.walmartimages.com/asr/a7b3bd36-e71d-41aa-9ace-cf70a2bade2b.e880a17b460f81c9ea3b7ec5f49d2d05.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF"
+    }
+]

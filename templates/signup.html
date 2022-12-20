@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock %}
+{% block body %}
+{% include 'navbar.html' %}
+    {% block content %}
+
+
+<div class="container-fluid" id="signup-div">
+    <form class="col-12" action="/signup" method="POST">
+
+        <div class="row">
+            <div class="form-floating mb-3">
+                <input class="form-control" required = "true" id="floatingInput" type="text" name="fname" placeholder="First Name">
+                <label for="floatingInput">First Name</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-floating mb-3">
+                <input class="form-control" required = "true" id="floatingInput" type="text" name="lname" placeholder="Last Name">
+                <label for="floatingInput">Last Name</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-floating mb-3">
+                <input class="form-control" required = "true" id="floatingInput" type="text" name="email" placeholder="Email">
+                <label for="floatingInput">Email</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-floating mb-3">
+                <input class="form-control" id="floatingInput" type="text" name="password" placeholder="Password">
+                <label for="floatingInput">Password</label>
+                <span><i>Must be 8-10 characters in length and include one capatalized letter, one numeric character, and one special character.</i></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-floating mb-3">
+                <input class="form-control" id="floatingInput" type="text" name="passwordconf" placeholder="Password Confirmation">
+                <label for="floatingInput">Password Confirmation</label>
+                <span><i>Must be 8-10 characters in length and include one capatalized letter, one numeric character, and one special character.</i></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <button type="submit" id="signup" class="btn btn-primary">Sign Up</button>
+        </div>
+
+        <span>Already have an account? <a href="/login">Log In</a></span>
+
+    </form>
+
+
+</div>
+
+    {% endblock %}
+<!-- Javascript files imported here. -->
+<script src=""></script>
+{% endblock %}
