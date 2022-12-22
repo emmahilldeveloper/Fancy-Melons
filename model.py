@@ -89,7 +89,7 @@ class Tasting(db.Model):
 
 
 def connect_to_db(flask_app, db_uri="postgresql:///fancy_melons", echo=False):
-    flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
+    flask_app.config["SQLALCHEMY_DATABASE_URI"] = 'postgres://jzpanfessrmesz:c9d262646186e649fe2e1e7140af320330e6b46d95a01836a126bb450093b2cd@ec2-54-157-79-121.compute-1.amazonaws.com:5432/daq6neop05sbvo'
     flask_app.config["SQLALCHEMY_ECHO"] = echo
     flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
