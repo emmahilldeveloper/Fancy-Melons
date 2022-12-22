@@ -88,19 +88,15 @@ class Tasting(db.Model):
 
 
 
-def create_app():
-    app = flask.Flask("app")
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://duhudedxphzrkj:a7caf2106549a13b5787f551be097a421030e1acc1716f1f7d80a7df80c7f860@ec2-3-229-161-70.compute-1.amazonaws.com:5432/dfblkupk7o6aes'
-    app.config["SQLALCHEMY_ECHO"] = False
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+# def create_app():
+#     app = flask.Flask("app")
+#     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://duhudedxphzrkj:a7caf2106549a13b5787f551be097a421030e1acc1716f1f7d80a7df80c7f860@ec2-3-229-161-70.compute-1.amazonaws.com:5432/dfblkupk7o6aes'
+#     app.config["SQLALCHEMY_ECHO"] = False
+#     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-    db.init_app(app)
-    with app.app_context():
-        # Extensions like Flask-SQLAlchemy now know what the "current" app
-        # is while within this block. Therefore, you can now run........
-        db.create_all()
+#     db.init_app(app)
 
-    return app
+#     return app
 
 
 
@@ -109,7 +105,7 @@ def create_app():
 def connect_to_db(flask_app, echo=False):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = 'postgresql://duhudedxphzrkj:a7caf2106549a13b5787f551be097a421030e1acc1716f1f7d80a7df80c7f860@ec2-3-229-161-70.compute-1.amazonaws.com:5432/dfblkupk7o6aes'
     flask_app.config["SQLALCHEMY_ECHO"] = echo
-    # flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     db.app = flask_app
     db.init_app(flask_app)
@@ -117,4 +113,8 @@ def connect_to_db(flask_app, echo=False):
 if __name__ == "__main__":
     from server import app
 
+    with app.app_context():
+            # Extensions like Flask-SQLAlchemy now know what the "current" app
+            # is while within this block. Therefore, you can now run........
+            db.create_all()
     connect_to_db(app)

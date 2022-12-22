@@ -8,8 +8,8 @@ import crud
 import model
 import server
 
-os.system("dropdb fancy_melons")
-os.system("createdb fancy_melons")
+os.system("dropdb fancy-melons")
+os.system("createdb fancy-melons")
 model.connect_to_db(server.app)
 model.db.create_all()
 
