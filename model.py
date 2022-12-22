@@ -95,6 +95,10 @@ def connect_to_db(flask_app, echo=False):
 
     db.app = flask_app
     db.init_app(flask_app)
+    with app.app_context():
+        # Extensions like Flask-SQLAlchemy now know what the "current" app
+        # is while within this block. Therefore, you can now run........
+        db.create_all()
 
 if __name__ == "__main__":
     from server import app
