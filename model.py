@@ -2,6 +2,7 @@
 
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
+import flask
 
 db = SQLAlchemy()
 
@@ -87,6 +88,20 @@ class Tasting(db.Model):
 
 
 
+def create_app():
+    app = flask.Flask("app")
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ehqhdsdkvftrad:5ddbe6e977abd2d03ffa56b018fb7e70c83a78d37a0e10ea4a4fbe8d11734239@ec2-34-231-63-30.compute-1.amazonaws.com:5432/d4679k1g46l8f3'
+    db.init_app(app)
+    with app.app_context():
+        # Extensions like Flask-SQLAlchemy now know what the "current" app
+        # is while within this block. Therefore, you can now run........
+        db.create_all()
+
+    return app
+
+
+
+
 
 def connect_to_db(flask_app, echo=False):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = 'postgres://ehqhdsdkvftrad:5ddbe6e977abd2d03ffa56b018fb7e70c83a78d37a0e10ea4a4fbe8d11734239@ec2-34-231-63-30.compute-1.amazonaws.com:5432/d4679k1g46l8f3'
@@ -95,10 +110,6 @@ def connect_to_db(flask_app, echo=False):
 
     db.app = flask_app
     db.init_app(flask_app)
-    with app.app_context():
-        # Extensions like Flask-SQLAlchemy now know what the "current" app
-        # is while within this block. Therefore, you can now run........
-        db.create_all()
 
 if __name__ == "__main__":
     from server import app
